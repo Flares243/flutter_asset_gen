@@ -34,6 +34,15 @@ class $className {\n
   }
 
   String _formatFiledName(String path) {
+    path = removeFileExtension(path);
+
+    path = path
+        .replaceAll('/', '_')
+        .replaceAll('.', '_')
+        .replaceAll(' ', '_')
+        .replaceAll('-', '_')
+        .replaceAll('@', '_AT_');
+
     return toCamelCase(path);
   }
 
@@ -52,6 +61,14 @@ class $className {\n
     }
 
     return camelCaseString;
+  }
+
+  String removeFileExtension(String filePath) {
+    final int lastDotIndex = filePath.lastIndexOf('.');
+    if (lastDotIndex != -1) {
+      return filePath.substring(0, lastDotIndex);
+    }
+    return filePath; // If there is no '.', return the original path.
   }
 
   String toUppercaseFirstLetter(String str) {
