@@ -18,7 +18,7 @@ void main(List<String> args) {
   parser.addOption(
     'output',
     abbr: 'o',
-    defaultsTo: 'lib${separator}const${separator}resource.dart',
+    defaultsTo: 'lib${separator}generated${separator}assets.g.dart',
     help: 'Your resource file path. \n'
         "If it's a relative path, the relative flutter root directory",
   );
@@ -31,7 +31,7 @@ void main(List<String> args) {
   parser.addOption(
     'name',
     abbr: 'n',
-    defaultsTo: 'R',
+    defaultsTo: 'Assets',
     help: 'The class name for the constant.',
   );
   parser.addFlag('help', abbr: 'h', help: 'Help usage', defaultsTo: false);

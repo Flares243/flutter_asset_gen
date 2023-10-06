@@ -34,13 +34,24 @@ class $className {\n
   }
 
   String _formatFiledName(String path) {
-    path = path
-        .replaceAll('/', '_')
-        .replaceAll('.', '_')
-        .replaceAll(' ', '_')
-        .replaceAll('-', '_')
-        .replaceAll('@', '_AT_');
-    return path.toUpperCase();
+    return toCamelCase(path);
+  }
+
+  String toCamelCase(String input) {
+    final List<String> words = input.split(RegExp(r'\s+|_+|-+'));
+
+    if (words.isEmpty) {
+      return '';
+    }
+
+    String camelCaseString = words[0].toLowerCase();
+
+    for (int i = 1; i < words.length; i++) {
+      camelCaseString +=
+          words[i][0].toUpperCase() + words[i].substring(1).toLowerCase();
+    }
+
+    return camelCaseString;
   }
 
   String toUppercaseFirstLetter(String str) {
