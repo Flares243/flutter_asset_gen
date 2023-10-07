@@ -1,4 +1,4 @@
-# flutter_asset_generator
+# Forked from https://pub.dev/packages/flutter_asset_generator
 
 English | [中文文档](README_CHN.md)
 
