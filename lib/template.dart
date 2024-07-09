@@ -16,16 +16,22 @@ class $className {\n
 
   String get classDeclareFooter => '}\n';
 
-  String formatFiled(String path, String projectPath, bool isPreview) {
-    if (isPreview) {
-      return '''
+  String? formatFiled(String path, String projectPath, bool isPreview) {
+    final String? fileName = _formatFiledName(path);
+
+    if (fileName != null) {
+      if (isPreview) {
+        return '''
 
   /// ![preview](file://$projectPath${path_library.separator}${_formatPreviewName(path)})
-  static const String ${_formatFiledName(path)} = '$path';\n''';
-    }
-    return '''
+  static const String $fileName = '$path';\n''';
+      }
+      return '''
 
-  static const String ${_formatFiledName(path)} = '$path';\n''';
+  static const String $fileName = '$path';\n''';
+    }
+
+    return null;
   }
 
   String _formatPreviewName(String path) {
@@ -33,17 +39,25 @@ class $className {\n
     return path;
   }
 
-  String _formatFiledName(String path) {
-    path = removeFileExtension(path);
+  String? _formatFiledName(String path) {
+    try {
+      String formatedPath = removeFileExtension(path);
 
-    path = path
-        .replaceAll('/', '_')
-        .replaceAll('.', '_')
-        .replaceAll(' ', '_')
-        .replaceAll('-', '_')
-        .replaceAll('@', '_AT_');
+      formatedPath = formatedPath
+          .replaceFirst('assets/', '')
+          .replaceAll('/', '_')
+          .replaceAll('.', '_')
+          .replaceAll(' ', '_')
+          .replaceAll('-', '_')
+          .replaceAll('@', '_AT_');
 
-    return toCamelCase(path);
+      return toCamelCase(formatedPath);
+    } catch (err, stack) {
+      print('Error at: $path');
+      print(err);
+      print(stack);
+      return null;
+    }
   }
 
   String toCamelCase(String input) {
