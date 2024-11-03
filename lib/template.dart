@@ -45,9 +45,9 @@ class $className {\n
 
       formatedPath = formatedPath
           .replaceFirst('assets/', '')
+          .replaceAll(' ', '_')
           .replaceAll('/', '_')
           .replaceAll('.', '_')
-          .replaceAll(' ', '_')
           .replaceAll('-', '_')
           .replaceAll('@', '_AT_');
 

@@ -43,10 +43,10 @@ class ResourceDartBuilder {
     final String pubYamlPath = '$projectRootPath${separator}pubspec.yaml';
     try {
       final List<String> assetPathList = _getAssetPath(pubYamlPath);
-      logger.debug('The asset path list is: $assetPathList');
+      print('The asset path list is: $assetPathList');
       generateImageFiles(assetPathList);
       writeText('allImageList = $allImageList');
-      logger.debug('the image is $allImageList');
+      print('the image is $allImageList');
       generateCode(className);
     } catch (e) {
       if (e is StackOverflowError && e.stackTrace != null) {

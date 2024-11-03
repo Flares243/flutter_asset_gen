@@ -12,13 +12,13 @@ void main(List<String> args) {
   parser.addFlag(
     'watch',
     abbr: 'w',
-    defaultsTo: true,
+    defaultsTo: false,
     help: 'Continue to monitor changes after execution of orders.',
   );
   parser.addOption(
     'output',
     abbr: 'o',
-    defaultsTo: 'lib${separator}generated${separator}assets.g.dart',
+    defaultsTo: 'lib${separator}assets.g.dart',
     help: 'Your resource file path. \n'
         "If it's a relative path, the relative flutter root directory",
   );
@@ -43,7 +43,7 @@ void main(List<String> args) {
     abbr: 'p',
     help:
         'Enable preview comments, defaults to true, use --no-preview to disable this functionality',
-    defaultsTo: true,
+    defaultsTo: false,
   );
 
   final ArgResults results = parser.parse(args);

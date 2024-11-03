@@ -1,8 +1,0 @@
-name: "example_for_generator"
-description: example
-version: 0.0.1
-homepage: https://github.com
-flutter:
-  assets:
-    - images/
-    - assets/
