@@ -39,14 +39,19 @@ class ResourceDartBuilder {
 
   void generateResourceDartFile(String className) {
     print('$_generateLogPrefix for project: $projectRootPath');
+
     stopWatch();
     final String pubYamlPath = '$projectRootPath${separator}pubspec.yaml';
+
     try {
       final List<String> assetPathList = _getAssetPath(pubYamlPath);
       print('The asset path list is: $assetPathList');
+
       generateImageFiles(assetPathList);
+
       writeText('allImageList = $allImageList');
       print('the image is $allImageList');
+
       generateCode(className);
     } catch (e) {
       if (e is StackOverflowError && e.stackTrace != null) {
@@ -81,12 +86,17 @@ class ResourceDartBuilder {
   List<String> _getAssetPath(String yamlPath) {
     final YamlMap map = loadYaml(File(yamlPath).readAsStringSync()) as YamlMap;
     final dynamic flutterMap = map['flutter'];
+
     if (flutterMap is YamlMap) {
-      final dynamic assetMap = flutterMap['assets'];
-      if (assetMap is YamlList) {
-        return getListFromYamlList(assetMap);
-      }
+      final dynamic assetsList = flutterMap['assets'];
+      final dynamic shadersList = flutterMap['shaders'];
+
+      return [
+        if (assetsList is YamlList) ...getListFromYamlList(assetsList),
+        if (shadersList is YamlList) ...getListFromYamlList(shadersList),
+      ];
     }
+
     return <String>[];
   }
 
